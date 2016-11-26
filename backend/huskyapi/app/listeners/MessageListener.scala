@@ -23,7 +23,7 @@ class MessageListener {
     .getReference("messages")
 
   ref.limitToLast(1)
-  ref.addChildEventListener( new ChildEventListener {
+  ref.addChildEventListener(new ChildEventListener {
     override def onChildAdded(dataSnapshot: DataSnapshot, s: String): Unit = {
       val message = parseToMessage(dataSnapshot)
       suggestion(message)
@@ -53,11 +53,13 @@ class MessageListener {
 
   private def suggestion(message: Message): Unit = {
     val pattern = message.text.toLowerCase
-    if (pattern.contains("")) {
+    if (pattern.contains("เครื่องบิน")
+      || pattern.contains("การเดินทาง")) {
       println("นั่งเครืองบินไปสิ")
     }
 
-    if (pattern.contains("")) {
+    if (pattern.contains("โรงแรม")
+      || pattern.contains("ที่พัก")) {
       println("จองอโกด้าสิ")
     }
   }
