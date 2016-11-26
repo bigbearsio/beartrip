@@ -15,7 +15,7 @@ routesGenerator := InjectedRoutesGenerator
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.8.4"
-  , "com.google.firebase" % "firebase-admin" % "4.0.0"
+  , "com.google.firebase" % "firebase-admin" % "4.0.1"
   , "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0"
 )
 
