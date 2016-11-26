@@ -26,21 +26,21 @@ class MessageListener {
   ref.addChildEventListener( new ChildEventListener {
     override def onChildAdded(dataSnapshot: DataSnapshot, s: String): Unit = {
       val message = parseToMessage(dataSnapshot)
-
+      suggestion(message)
       println(s"Added: ${message}")
     }
 
-    override def onChildRemoved(dataSnapshot: DataSnapshot): Unit = ???
+    override def onChildRemoved(dataSnapshot: DataSnapshot): Unit = {}
 
-    override def onChildMoved(dataSnapshot: DataSnapshot, s: String): Unit = ???
+    override def onChildMoved(dataSnapshot: DataSnapshot, s: String): Unit = {}
 
     override def onChildChanged(dataSnapshot: DataSnapshot, s: String): Unit = {
       val message = parseToMessage(dataSnapshot)
-
+      suggestion(message)
       println(s"Changed: ${message}")
     }
 
-    override def onCancelled(databaseError: DatabaseError): Unit = ???
+    override def onCancelled(databaseError: DatabaseError): Unit = {}
   })
 
   private def parseToMessage(data: DataSnapshot): Message = {
@@ -49,6 +49,17 @@ class MessageListener {
       , text = document.get("text")
       , photoUrl = document.get("photoUrl")
       , created = document.get("created"))
+  }
+
+  private def suggestion(message: Message): Unit = {
+    val pattern = message.text.toLowerCase
+    if (pattern.contains("")) {
+      println("นั่งเครืองบินไปสิ")
+    }
+
+    if (pattern.contains("")) {
+      println("จองอโกด้าสิ")
+    }
   }
 
 }
