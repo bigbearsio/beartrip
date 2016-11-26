@@ -1,4 +1,3 @@
-// firebase chat
 (function() {
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
@@ -15,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
+  'use strict';
 
   // Initializes HuskeyChat.
   function HuskeyChat(template) {
@@ -71,11 +70,13 @@
     // Check that the user entered a message and is signed in.
     if (this.template.input && this.checkSignedInWithMessage()) {
       var currentUser = this.auth.currentUser;
+      var profileUrl = currentUser.photoURL ||  '/images/profile_placeholder.png';
+
       // Add a new message entry to the Firebase Database.
       this.messagesRef.push({
         name: currentUser.displayName,
         text: this.template.input,
-        photoUrl: currentUser.photoURL ||  '/images/profile_placeholder.png'
+        photoUrl: profileUrl
       }).then(function() {
         // Clear message text field
         this.template.input = '';
@@ -144,9 +145,7 @@
     // Sign in Firebase using popup auth and Google as the identity provider.
     var provider = new firebase.auth.GoogleAuthProvider();
     //this.auth.signInWithPopup(provider);
-    //this.auth.signInWithRedirect(provider);
-    console.log('try login');
-    firebase.auth().signInWithRedirect(provider);
+    this.auth.signInWithRedirect(provider);
   };
 
   // Signs-out of Friendly Chat.
@@ -157,14 +156,15 @@
 
   // Triggers when the auth state change for instance when the user signs-in or signs-out.
   HuskeyChat.prototype.onAuthStateChanged = function(user) {
-    console.log("checking user status");
     var user;
     this.auth.getRedirectResult().then(function(result) {
       if (result.credential) {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         var token = result.credential.accessToken;
         // ...
       }
-      
+      // The signed-in user info.
+      user = result.user;
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -175,29 +175,21 @@
       var credential = error.credential;
       // ...
     });
+    if (user) { // User is signed in!
+      // Get profile pic and user's name from the Firebase user object.
+      var profilePicUrl = (user.photoURL || '/images/profile_placeholder.png');
+      var userName = user.displayName;
+      var avatarColor = fromUserToColor(userName);
 
-      // The signed-in user info.
-      //var user = result.user;
-      if (user) { // User is signed in!
-        console.log("login");
-        // Get profile pic and user's name from the Firebase user object.
-        var profilePicUrl = user.photoURL;
-        var userName = user.displayName;
-        //template.channel = 'polymer-chat';
-        //template.cats = [];
-        this.template.uuid = userName;
-        this.template.avatar = (profilePicUrl || '/images/profile_placeholder.png');
-        this.template.color = 'green';
+      this.template.uuid = userName;
+      this.template.avatar = profilePicUrl;
+      this.template.color = avatarColor;
 
-        // We load currently existing chant messages.
-        this.loadMessages();
-      } else { // User is signed out!
-        //console.log("not login");
-        this.signIn()
-
-        //this.loadMessages();
-      }
-    
+      // We load currently existing chant messages.
+      this.loadMessages();
+    } else { // User is signed out!
+      this.signIn()
+    }
   };
 
   // Returns true if user is signed-in. Otherwise false and displays a message.
@@ -230,8 +222,8 @@
   HuskeyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
     var temp = Array.prototype.splice.call(this.template.messageList, 0);
     temp.push({
-      color: 'blue',
-      avatar: imageUri,
+      color: fromUserToColor(name),
+      avatar: picUrl,
       text: text,
       uuid: name,
       timestamp: new Date()
@@ -243,16 +235,6 @@
       chatDiv.scrollTop = chatDiv.scrollHeight; //TODO: Need to fix so that we can find the .chat-list class object
     });
 
-  };
-
-  // Enables or disables the submit button depending on the values of the input
-  // fields.
-  HuskeyChat.prototype.toggleButton = function() {
-    if (this.messageInput.value) {
-      this.submitButton.removeAttribute('disabled');
-    } else {
-      this.submitButton.setAttribute('disabled', 'true');
-    }
   };
 
   // Checks that the Firebase SDK has been correctly setup and configured.
@@ -269,6 +251,16 @@
           'displayed there.');
     }
   };
+
+  // avatar colors
+  var colors = ['navy', 'slate', 'olive', 'moss', 'chocolate', 'buttercup', 'maroon', 'cerise', 'plum', 'orchid'];
+
+  function fromUserToColor(userName) {
+    var colorIndex = Array.prototype.reduce.call(userName, function (acc, x) { return acc + x.charCodeAt(0); }, 0) % colors.length;
+
+    return colors[colorIndex];
+  }
+
 
   window.HuskeyChat = HuskeyChat;
 
