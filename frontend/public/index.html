@@ -153,19 +153,21 @@
 
     </section>
 
-        <section id="decided">
-        <paper-item class="subdue layout horizontal center">Decided</paper-item>
+    <section id="decided">
+    <paper-item class="subdue layout horizontal center">Decided</paper-item>
 
+<template is="dom-repeat" items="{{decided}}" as="item">
 <paper-card class="rate">
   <div class="rate-content">
     <div class="card-content">
-      <div class="rate-header">West Inn</div>
-      <div class="rate-name">123 address</div>
-      <div>Thursday - Friday. 5 extra bed </div>
+      <div class="rate-header">{{item.name}}</div>
+      <div class="rate-name">฿ {{item.price}}</div>
+      <div>{{item.description}}</div>
     </div>
   </div>
-  <div class="rate-image" style="background-image: url('http://placehold.it/170x170/FFC107/000000')"></div>
+  <div class="rate-image" style="background-image: url('{{item.photo}}')"></div>
 </paper-card>
+</template>
 
     </section>
 

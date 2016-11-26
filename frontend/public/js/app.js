@@ -35,6 +35,7 @@
     }).bind(this);
 
     template.messageList = [];
+    template.decided = [];
     template.input = '';
   }
 
@@ -50,12 +51,24 @@
 
   // Loads chat messages history and listens for upcoming ones.
   HuskeyChat.prototype.loadMessages = function() {
-    // Reference to the /messages/ database path.
     this.messagesRef = this.database.ref('messages');
-    // Make sure we remove all previous listeners.
     this.messagesRef.off();
 
-    // Loads the last 12 messages and listen for new ones.
+    this.decidedRef = this.database.ref('decided');
+    this.decidedRef.off();
+
+    var setDecided = function(data) {
+      var val = data.val();
+      console.log(val);
+
+      var temp = Array.prototype.splice.call(this.template.decided, 0);
+      temp.push(val);
+      this.template.decided = temp;
+
+    }.bind(this);
+    this.decidedRef.limitToLast(12).on('child_added', setDecided);
+    //this.decidedRef.limitToLast(12).on('child_changed', setDecided);
+
     var setMessage = function(data) {
       var val = data.val();
       this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
