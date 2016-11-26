@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="A chat room demo using Polymer 1.x and PubNub">
-  <meta name="author" content="Tomomi Imura  @girlie_mac">
+  <meta name="description" content="Trip Planner">
+  <meta name="author" content="BigBears.IO">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title>Husky Tour</title>
 
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#00BCD4">
 
-    <!-- Tile color for Win8 -->
-  <meta name="msapplication-TileColor" content="#00BCD4">
+  <!-- Progressive Web App Setup -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Windows Tile -->
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
 
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -24,7 +27,7 @@
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <meta name="apple-mobile-web-app-title" content="Husky Trip">
   <link rel="apple-touch-icon" sizes="128x128" href="images/app-icon-128.png">
 
   <!-- More icons -->
@@ -103,7 +106,7 @@
     <section id="deciding">
         <paper-item class="subdue layout horizontal center">Deciding</paper-item>
 
-  <paper-card image="http://placehold.it/400x150/FFC107/000000">
+  <paper-card image="//placehold.it/400x150/FFC107/000000">
     <div class="card-content">
       <div class="cafe-header">Cafe Basilico
         <div class="cafe-location cafe-light">
@@ -127,7 +130,7 @@
     </div>
   </paper-card>
 
-    <paper-card image="http://placehold.it/400x150/FFC107/000000">
+    <paper-card image="//placehold.it/400x150/FFC107/000000">
     <div class="card-content">
       <div class="cafe-header">Cafe Basilico
         <div class="cafe-location cafe-light">
