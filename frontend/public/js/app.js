@@ -34,8 +34,8 @@
       this.saveMessage(e);
     }).bind(this);
 
-    template.sendMyMessage = (function(e) {
-      this.saveMessage(e);
+    template.saveToDecided = (function(e) {
+      this.saveToDecided(e);
     }).bind(this);
 
     template.messageList = [];
@@ -97,6 +97,19 @@
     }.bind(this);
     this.messagesRef.limitToLast(12).on('child_added', setMessage);
     this.messagesRef.limitToLast(12).on('child_changed', setMessage);
+  };
+
+  // Saves deciding to decided.
+  HuskeyChat.prototype.saveToDecided = function(e) {
+    e.preventDefault();
+    var item = e.model.get('item');
+
+      // Add a new message entry to the Firebase Database.
+      this.decidedRef.push(item).then(function() {
+        //this.template.input = '';
+      }.bind(this)).catch(function(error) {
+        console.error('Error writing new message to Firebase Database', error);
+      });
   };
 
   // Saves a new message on the Firebase DB.

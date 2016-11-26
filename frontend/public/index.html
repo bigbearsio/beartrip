@@ -111,7 +111,7 @@
     <paper-card heading="{{item.name}}" image="{{item.photo}}" alt="Travel" class="white" style="margin-left:4px;">
       <div class="card-actions horizontal justified">
         <paper-icon-button icon="favorite"></paper-icon-button>
-        <paper-icon-button icon="check"></paper-icon-button>
+        <paper-icon-button icon="check" on-tap="saveToDecided"></paper-icon-button>
         <paper-button>{{item.score}}</paper-button>
       </div>
     </paper-card>
