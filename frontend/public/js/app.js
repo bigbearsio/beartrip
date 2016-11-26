@@ -34,8 +34,14 @@
       this.saveMessage(e);
     }).bind(this);
 
-    template.sendMyMessage = (function(e) {
-      this.saveMessage(e);
+    template.likeSend = (function(e) {
+      firebase.database().ref('deciding/' + e.model.get('item.id')).set({
+        id: e.model.get('item.id'),
+        name: e.model.get('item.name'),
+        photo: e.model.get('item.photo'),
+        score: e.model.get('item.score') + 1
+      });
+      e.model.set('item.score',e.model.get('item.score'));
     }).bind(this);
 
     template.messageList = [];
@@ -67,7 +73,6 @@
 
     var setDecided = function(data) {
       var val = data.val();
-      console.log(val);
 
       var temp = Array.prototype.splice.call(this.template.decided, 0);
       temp.push(val);
@@ -78,9 +83,16 @@
     this.decidedRef.limitToLast(12).on('child_added', setDecided);
     //this.decidedRef.limitToLast(12).on('child_changed', setDecided);
 
+    var addLikeDeciding = function(id) {
+      firebase.database().ref('deciding/' + id).set({
+        username: name,
+        email: email,
+        profile_picture : imageUrl
+      });
+    }.bind(this);
+
     var setDeciding = function(data) {
       var val = data.val();
-      console.log(val);
 
       var temp = Array.prototype.splice.call(this.template.deciding, 0);
       temp.push(val);
@@ -88,8 +100,13 @@
 
     }.bind(this);
 
+    var decidingChanged = function(data) {
+      this.updateDeciding(data.val());
+    }.bind(this);
+    
+
     this.decidingRef.limitToLast(12).on('child_added', setDeciding);
-    this.decidingRef.limitToLast(12).on('child_changed', setDeciding);
+    this.decidingRef.limitToLast(12).on('child_changed', decidingChanged);
 
     var setMessage = function(data) {
       var val = data.val();
@@ -272,6 +289,31 @@
       chatDiv.scrollTop = chatDiv.scrollHeight; //TODO: Need to fix so that we can find the .chat-list class object
     });
 
+  };
+
+  HuskeyChat.prototype.updateDeciding = function(data) {
+    //var temp = Array.prototype.splice.call(this.template.deciding, 0);
+    var temp = this.template.deciding.slice(0);
+    
+    temp.forEach(function(o){
+      if (o.id == data.id){
+
+        o.score = data.score;
+      }
+    });
+    
+    var l = this.template.deciding.length;
+
+    for(var i=0;i<l;i++) {
+      this.template.deciding.pop();
+    }
+
+    for(var i=0;i<l;i++) {
+      this.template.deciding.push(temp[i]);
+    }
+
+
+    console.log(this.template.deciding);
   };
 
   // Checks that the Firebase SDK has been correctly setup and configured.
