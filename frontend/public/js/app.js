@@ -44,6 +44,20 @@
       e.model.set('item.score',e.model.get('item.score'));
     }).bind(this);
 
+    template.saveToDecided = (function(e) {
+      this.saveToDecided(e);
+      firebase.database().ref('deciding/').remove();
+
+     var l = this.template.deciding.length;
+
+      for(var i=0;i<l;i++) {
+        this.template.pop("deciding");
+      }
+
+      console.log(this.template);
+      
+    }).bind(this);
+
     template.messageList = [];
     template.decided = [];
     template.deciding = [];
@@ -114,6 +128,19 @@
     }.bind(this);
     this.messagesRef.limitToLast(12).on('child_added', setMessage);
     this.messagesRef.limitToLast(12).on('child_changed', setMessage);
+  };
+
+  // Saves deciding to decided.
+  HuskeyChat.prototype.saveToDecided = function(e) {
+    e.preventDefault();
+    var item = e.model.get('item');
+
+      // Add a new message entry to the Firebase Database.
+      this.decidedRef.push(item).then(function() {
+        //this.template.input = '';
+      }.bind(this)).catch(function(error) {
+        console.error('Error writing new message to Firebase Database', error);
+      });
   };
 
   // Saves a new message on the Firebase DB.

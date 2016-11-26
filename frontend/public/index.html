@@ -108,10 +108,10 @@
 
 <div class="horizontal">
   <template is="dom-repeat" items="{{deciding}}" as="item">
-    <paper-card heading="{{item.name}}" image="//placehold.it/200x150/FFC107/000000" alt="Travel" class="white" style="margin-left:4px;">
+    <paper-card heading="{{item.name}}" image="{{item.photo}}" alt="Travel" class="white" style="margin-left:4px;">
       <div class="card-actions horizontal justified">
         <paper-icon-button on-tap="likeSend" icon="favorite"></paper-icon-button>
-        <paper-icon-button icon="check"></paper-icon-button>
+        <paper-icon-button icon="check" on-tap="saveToDecided"></paper-icon-button>
         <paper-button>{{item.score}}</paper-button>
       </div>
     </paper-card>

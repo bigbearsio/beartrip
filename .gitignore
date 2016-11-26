@@ -1,5 +1,6 @@
 .sbtserver
 .sbtserver.lock
+localhost.conf
 
 /frontend/node_modules/
 /node_modules
