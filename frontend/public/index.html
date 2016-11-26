@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>Kitteh Anonymous Chat</title>
+  <title>Husky Tour</title>
 
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#00BCD4">
@@ -70,23 +70,24 @@
     </core-pubnub>
 
   <!-- Drawer Panel (Left Column) -->
-  <paper-drawer-panel id="drawerPanel">
-
+  <paper-drawer-panel id="drawerPanel" right-drawer>
     <!-- Drawer Header/Toolbar -->
-    <!--<paper-header-panel drawer>
+    <paper-header-panel drawer>
+      <!--
       <paper-toolbar id="navheader" class="tall">
         <div class$="{{_colorClass(color)}} middle"  style$="{{_backgroundImage(avatar)}}"></div>
         <div class="bottom uuid">{{uuid}}</div>
-      </paper-toolbar>-->
+      </paper-toolbar>
+      -->
 
       <!-- Drawer Content -->
-      <!--<section id="onlineList">
+      <section id="onlineList">
         <paper-item class="subdue layout horizontal center">Online Now</paper-item>
         <template is="dom-repeat" items="{{cats}}" as="cat">
           <paper-item>{{cat}}</paper-item>
         </template>
       </section>
-    </paper-header-panel>-->
+    </paper-header-panel>
 
     <!-- Main Area -->
     <paper-header-panel main>
