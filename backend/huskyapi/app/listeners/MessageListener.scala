@@ -37,7 +37,6 @@ class MessageListener {
     override def onChildChanged(dataSnapshot: DataSnapshot, s: String): Unit = {
       val message = parseToMessage(dataSnapshot)
       suggestion(message)
-      println(s"Changed: ${message}")
     }
 
     override def onCancelled(databaseError: DatabaseError): Unit = {}
@@ -55,13 +54,23 @@ class MessageListener {
     val pattern = message.text.toLowerCase
     if (pattern.contains("เครื่องบิน")
       || pattern.contains("การเดินทาง")) {
-      println("นั่งเครืองบินไปสิ")
+
+      suggestFlights()
     }
 
     if (pattern.contains("โรงแรม")
       || pattern.contains("ที่พัก")) {
-      println("จองอโกด้าสิ")
+
+      suggestHotels()
     }
+  }
+
+  private def suggestFlights(): Unit = {
+    println("TODO: นั่งเครืองบินไปสิ")
+  }
+
+  private def suggestHotels(): Unit = {
+    println("TODO: จองอโกด้าสิ")
   }
 
 }
