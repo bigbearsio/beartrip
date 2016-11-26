@@ -61,39 +61,10 @@
 
   <template is="dom-bind" id="app">
 
-    <!-- Use your own publish_key and subscribe_key please!  --> 
-    <core-pubnub publish_key="pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695" subscribe_key="sub-c-f762fb78-2724-11e4-a4df-02ee2ddab7fe" uuid="{{uuid}}">
-      <core-pubnub-subscribe channel="polymer-chat" id="sub" on-callback="subscribeCallback" on-presence="presenceChanged" on-error="{{error}}">
-        <core-pubnub-publish channel="polymer-chat" message="" id="pub" on-error="{{error}}"></core-pubnub-publish>
-        <core-pubnub-history channel="polymer-chat" count="30" on-success="historyRetrieved" on-error="{{error}}"></core-pubnub-history>
-      </core-pubnub-subscribe>
-    </core-pubnub>
-
   <!-- Drawer Panel (Left Column) -->
   <paper-drawer-panel id="drawerPanel" drawer-width="500px" right-drawer>
     <!-- Drawer Header/Toolbar -->
     <paper-header-panel drawer>
-      <!--
-      <paper-toolbar id="navheader" class="tall">
-        <div class$="{{_colorClass(color)}} middle"  style$="{{_backgroundImage(avatar)}}"></div>
-        <div class="bottom uuid">{{uuid}}</div>
-      </paper-toolbar>
-      -->
-
-      <!-- Drawer Content -->
-      <!--<section id="onlineList">
-        <paper-item class="subdue layout horizontal center">Now</paper-item>
-        <template is="dom-repeat" items="{{cats}}" as="cat">
-          <paper-item>{{cat}}</paper-item>
-        </template>
-      </section>-->
-<!--
-     <section id="settled">
-        <paper-item class="subdue layout horizontal center">Settled</paper-item>
-        <paper-item>testing 1</paper-item>
-        <paper-item>testing 2</paper-item>
-        <paper-item>testing 3</paper-item>
-      </section>-->
 
 <style is="custom-style">
   .cafe-header { @apply(--paper-font-headline); }
@@ -207,7 +178,7 @@
       <!-- Main Header/Toolbar -->
       <paper-toolbar>
         <div class="flex">Chiang Mai</div>
-        <iron-icon icon="account-circle"></iron-icon><span>{{occupancy}}</span>
+        <iron-icon icon="account-circle"></iron-icon><span>{{uuid}}</span>
       </paper-toolbar>
 
       <!-- Main Content -->
