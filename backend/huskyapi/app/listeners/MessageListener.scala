@@ -22,35 +22,33 @@ class MessageListener {
     .getInstance()
     .getReference("messages")
 
+  ref.limitToLast(1)
   ref.addChildEventListener( new ChildEventListener {
     override def onChildAdded(dataSnapshot: DataSnapshot, s: String): Unit = {
-      val document = dataSnapshot.getValue().asInstanceOf[util.HashMap[String, String]]
-      val message = Message(name = document.get("name")
-        , text = document.get("text")
-        , photoUrl = document.get("photoUrl")
-        , created = document.get("created"))
+      val message = parseToMessage(dataSnapshot)
 
-      println(message)
+      println(s"Added: ${message}")
     }
 
     override def onChildRemoved(dataSnapshot: DataSnapshot): Unit = ???
 
     override def onChildMoved(dataSnapshot: DataSnapshot, s: String): Unit = ???
 
-    override def onChildChanged(dataSnapshot: DataSnapshot, s: String): Unit = ???
+    override def onChildChanged(dataSnapshot: DataSnapshot, s: String): Unit = {
+      val message = parseToMessage(dataSnapshot)
+
+      println(s"Changed: ${message}")
+    }
 
     override def onCancelled(databaseError: DatabaseError): Unit = ???
   })
-//  ref.addValueEventListener(new ValueEventListener {
-//
-//    override def onDataChange(dataSnapshot: DataSnapshot): Unit = {
-//      val document = dataSnapshot.getValue()
-//      println(document)
-//    }
-//
-//    override def onCancelled(databaseError: DatabaseError): Unit = {
-//      println("not implement")
-//    }
-//  })
+
+  private def parseToMessage(data: DataSnapshot): Message = {
+    val document = data.getValue().asInstanceOf[util.HashMap[String, String]]
+    Message(name = document.get("name")
+      , text = document.get("text")
+      , photoUrl = document.get("photoUrl")
+      , created = document.get("created"))
+  }
 
 }
