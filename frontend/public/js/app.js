@@ -34,8 +34,13 @@
       this.saveMessage(e);
     }).bind(this);
 
+    template.sendMyMessage = (function(e) {
+      this.saveMessage(e);
+    }).bind(this);
+
     template.messageList = [];
     template.decided = [];
+    template.deciding = [];
     template.input = '';
   }
 
@@ -57,6 +62,9 @@
     this.decidedRef = this.database.ref('decided');
     this.decidedRef.off();
 
+    this.decidingRef = this.database.ref('deciding');
+    this.decidingRef.off();
+
     var setDecided = function(data) {
       var val = data.val();
       console.log(val);
@@ -66,8 +74,22 @@
       this.template.decided = temp;
 
     }.bind(this);
+
     this.decidedRef.limitToLast(12).on('child_added', setDecided);
     //this.decidedRef.limitToLast(12).on('child_changed', setDecided);
+
+    var setDeciding = function(data) {
+      var val = data.val();
+      console.log(val);
+
+      var temp = Array.prototype.splice.call(this.template.deciding, 0);
+      temp.push(val);
+      this.template.deciding = temp;
+
+    }.bind(this);
+
+    this.decidingRef.limitToLast(12).on('child_added', setDeciding);
+    this.decidingRef.limitToLast(12).on('child_changed', setDeciding);
 
     var setMessage = function(data) {
       var val = data.val();

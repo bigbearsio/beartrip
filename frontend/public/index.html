@@ -106,54 +106,17 @@
     <section id="deciding">
         <paper-item class="subdue layout horizontal center">Deciding</paper-item>
 
-  <paper-card image="//placehold.it/400x150/FFC107/000000">
-    <div class="card-content">
-      <div class="cafe-header">Cafe Basilico
-        <div class="cafe-location cafe-light">
-          <iron-icon icon="communication:location-on"></iron-icon>
-          <span>100</span>
-        </div>
+<div class="horizontal">
+  <template is="dom-repeat" items="{{deciding}}" as="item">
+    <paper-card heading="{{item.name}}" image="//placehold.it/200x150/FFC107/000000" alt="Travel" class="white" style="margin-left:4px;">
+      <div class="card-actions horizontal justified">
+        <paper-icon-button icon="favorite"></paper-icon-button>
+        <paper-icon-button icon="check"></paper-icon-button>
+        <paper-button>{{item.score}}</paper-button>
       </div>
-      <div class="cafe-rating">
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-      </div>
-      <p>$・Italian, Cafe</p>
-      <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
-    </div>
-    <div class="card-actions">
-      <paper-button class="cafe-reserve">+1</paper-button>
-      <paper-button class="cafe-reserve">Accept</paper-button>
-    </div>
-  </paper-card>
-
-    <paper-card image="//placehold.it/400x150/FFC107/000000">
-    <div class="card-content">
-      <div class="cafe-header">Cafe Basilico
-        <div class="cafe-location cafe-light">
-          <iron-icon icon="communication:location-on"></iron-icon>
-          <span>100</span>
-        </div>
-      </div>
-      <div class="cafe-rating">
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-        <iron-icon class="star" icon="star"></iron-icon>
-      </div>
-      <p>$・Italian, Cafe</p>
-      <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
-    </div>
-    <div class="card-actions">
-      <paper-button class="cafe-reserve">+1</paper-button>
-      <paper-button class="cafe-reserve">Accept</paper-button>
-    </div>
-  </paper-card>
-
+    </paper-card>
+  </template>
+</div>
     </section>
 
     <section id="decided">
