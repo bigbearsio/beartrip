@@ -1,5 +1,4 @@
 // firebase chat
-
 (function() {
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
@@ -78,9 +77,8 @@
         text: this.template.input,
         photoUrl: currentUser.photoURL ||  '/images/profile_placeholder.png'
       }).then(function() {
-        // Clear message text field and SEND button state.
+        // Clear message text field
         this.template.input = '';
-        //this.toggleButton();
       }.bind(this)).catch(function(error) {
         console.error('Error writing new message to Firebase Database', error);
       });
@@ -212,6 +210,12 @@
       timestamp: new Date()
     });
     this.template.messageList = temp;
+
+    this.template.async(function () {
+      var chatDiv = document.querySelector('.chat-list');
+      chatDiv.scrollTop = chatDiv.scrollHeight; //TODO: Need to fix so that we can find the .chat-list class object
+    });
+
   };
 
   // Enables or disables the submit button depending on the values of the input
