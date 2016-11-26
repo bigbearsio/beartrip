@@ -144,7 +144,8 @@
   HuskeyChat.prototype.signIn = function() {
     // Sign in Firebase using popup auth and Google as the identity provider.
     var provider = new firebase.auth.GoogleAuthProvider();
-    this.auth.signInWithPopup(provider);
+    //this.auth.signInWithPopup(provider);
+    this.auth.signInWithRedirect(provider);
   };
 
   // Signs-out of Friendly Chat.
@@ -155,6 +156,25 @@
 
   // Triggers when the auth state change for instance when the user signs-in or signs-out.
   HuskeyChat.prototype.onAuthStateChanged = function(user) {
+    var user;
+    this.auth.getRedirectResult().then(function(result) {
+      if (result.credential) {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        var token = result.credential.accessToken;
+        // ...
+      }
+      // The signed-in user info.
+      user = result.user;
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
     if (user) { // User is signed in!
       // Get profile pic and user's name from the Firebase user object.
       var profilePicUrl = (user.photoURL || '/images/profile_placeholder.png');
