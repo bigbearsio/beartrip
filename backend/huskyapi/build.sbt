@@ -1,5 +1,5 @@
 organization := "io.bigbears"
-name := "play-seed"
+name := "huskytour"
 version := "1.0.0"
 
 sources in(Compile, doc) := Seq.empty
@@ -15,10 +15,8 @@ routesGenerator := InjectedRoutesGenerator
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.8.4"
-  , "com.firebase" % "firebase-client" % "1.0.1"
+  , "com.google.firebase" % "firebase-admin" % "4.0.0"
   , "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0"
-  , "de.svenkubiak" % "jBCrypt" % "0.4.1"
-  , "net.codingwell" %% "scala-guice" % "4.1.0"
 )
 
 parallelExecution := true
