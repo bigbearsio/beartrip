@@ -50,7 +50,12 @@ paper-fab[icon=send] {
     text-transform: capitalize;
 }
 
-#settled {
+#decided {
+    margin: 16px;
+    text-transform: capitalize;
+}
+
+#deciding {
     margin: 16px;
     text-transform: capitalize;
 }
