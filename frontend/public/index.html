@@ -95,16 +95,86 @@
         <paper-item>testing 3</paper-item>
       </section>-->
 
-      <paper-card heading="West Inn" image="http://placehold.it/400x150/FFC107/000000" alt="Emmental">
-        <div class="card-content">
-          Friday - Saturday. Room 123. VIP special + 1 guest
+<style is="custom-style">
+  .cafe-header { @apply(--paper-font-headline); }
+  .cafe-light { color: var(--paper-grey-600); }
+  .cafe-location {
+    float: right;
+    font-size: 15px;
+    vertical-align: middle;
+  }
+  .cafe-reserve { color: var(--google-blue-500); }
+  iron-icon.star {
+    --iron-icon-width: 16px;
+    --iron-icon-height: 16px;
+    color: var(--paper-amber-500);
+  }
+  iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+
+    paper-card.rate { @apply(--layout-horizontal); }
+  .rate-image {
+    width: 170px;
+    height: 170px;
+    background-size: cover;
+  }
+  .rate-content {
+    @apply(--layout-flex);
+    float: left;
+  }
+  .rate-header { @apply(--paper-font-headline); }
+  .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+  paper-icon-button.rate-icon {
+    --iron-icon-fill-color: white;
+    --iron-icon-stroke-color: var(--paper-grey-600);
+  }
+</style>
+
+    <section id="deciding">
+        <paper-item class="subdue layout horizontal center">Deciding</paper-item>
+
+  <paper-card image="http://placehold.it/400x150/FFC107/000000">
+    <div class="card-content">
+      <div class="cafe-header">Cafe Basilico
+        <div class="cafe-location cafe-light">
+          <iron-icon icon="communication:location-on"></iron-icon>
+          <span>100</span>
         </div>
-        <div class="card-actions">
-          <paper-button>Share</paper-button>
-          <paper-button>Explore!</paper-button>
-        </div>
-      </paper-card>
-            
+      </div>
+      <div class="cafe-rating">
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+      </div>
+      <p>$・Italian, Cafe</p>
+      <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
+    </div>
+    <div class="card-actions">
+      <paper-button class="cafe-reserve">+1</paper-button>
+      <paper-button class="cafe-reserve">Accept</paper-button>
+    </div>
+  </paper-card>
+
+    </section>
+
+        <section id="decided">
+        <paper-item class="subdue layout horizontal center">Decided</paper-item>
+
+<paper-card class="rate">
+  <div class="rate-content">
+    <div class="card-content">
+      <div class="rate-header">West Inn</div>
+      <div class="rate-name">123 address</div>
+      <div>Thursday - Friday. 5 extra bed </div>
+    </div>
+  </div>
+  <div class="rate-image" style="background-image: url('http://placehold.it/170x170/FFC107/000000')"></div>
+</paper-card>
+
+    </section>
+
+
     </paper-header-panel>
 
     <!-- Main Area -->
