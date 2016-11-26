@@ -8,6 +8,7 @@ Prerequsit
 - Intelli J 2016
 - JDK 8
 - sbt
+- Please add conf "huskytrip.key" to localhost.conf (create file by yourself) 
 
 
 Command

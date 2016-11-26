@@ -2,19 +2,20 @@ package listeners
 
 import java.io.FileInputStream
 import java.util
-import javax.inject.Singleton
+import javax.inject.{Inject, Singleton}
 
 import com.google.firebase.database._
 import com.google.firebase.{FirebaseApp, FirebaseOptions}
 import models.Message
+import play.api.Configuration
 
 @Singleton
-class MessageListener {
+class MessageListener @Inject()(config: Configuration) {
 
   var isFirst = true
 
   val options = new FirebaseOptions.Builder()
-    .setServiceAccount(new FileInputStream("/Users/nuboat/Bigbears/huskytrip-firebase-adminsdk-1u0w9-b0c93ab2d1.json"))
+    .setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
     .setDatabaseUrl("https://huskytrip.firebaseio.com/")
     .build()
 
