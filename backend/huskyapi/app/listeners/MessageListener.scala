@@ -2,6 +2,7 @@ package listeners
 
 import java.io.FileInputStream
 import java.util
+import java.util.UUID
 import javax.inject.{Inject, Singleton}
 
 import com.google.firebase.database._
@@ -62,13 +63,17 @@ class MessageListener @Inject()(config: Configuration) {
   private def suggestion(message: Message): Unit = {
     val pattern = message.text.toLowerCase
     if (pattern.contains("เครื่องบิน")
-      || pattern.contains("เดินทาง")) {
+      || pattern.contains("เดินทาง")
+      || pattern.contains("flight")
+      || pattern.contains("kayaak")) {
 
       suggestFlights()
     }
 
     if (pattern.contains("โรงแรม")
-      || pattern.contains("ที่พัก")) {
+      || pattern.contains("ที่พัก")
+      || pattern.contains("hotel")
+      || pattern.contains("agoda")) {
 
       suggestHotels()
     }
@@ -76,64 +81,93 @@ class MessageListener @Inject()(config: Configuration) {
 
   private def suggestFlights(): Unit = {
     //println("TODO: นั่งเครืองบินไปสิ")
-    val flight1 = Flight(name = "Thai Airways"
-      , airline = "CNX-BKK"
-      , arrival = "2016-12-26"
-      , arrivalDate = "10:00-11:20"
-      , arrivalTime = "BKK-CNX"
-      , departure = "2016-12-24"
-      , departureDate = "17:30-18:50"
-      , departureTime = "Thai Air"
-      , photo = "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
+    val idD = UUID.randomUUID().toString
+    val idF = UUID.randomUUID().toString
+    val id1 = UUID.randomUUID().toString
+    val id2 = UUID.randomUUID().toString
+    val id3 = UUID.randomUUID().toString
 
-    val idD = (new java.util.Date()).getTime()
-    val idF = (new java.util.Date()).getTime() + 2
-    val id1 = (new java.util.Date()).getTime() + 4
-    val id2 = (new java.util.Date()).getTime() + 6
-    val id3 = (new java.util.Date()).getTime() + 8
+    val flight1 = new Flight(id1
+      , "Thai Airways"
+      , "Thai Air"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "10:00-11:20"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "17:30-18:50"
+      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
 
-    val flights = new java.util.HashMap[Long, Flight]()
-    flights.put(id1, flight1)
-    flights.put(id2, flight1)
-    flights.put(id3, flight1)
+    val flight2 = new Flight(id2
+      , "Thai Airways"
+      , "Thai Air"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "10:00-11:20"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "17:30-18:50"
+      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
 
-    val deciding = new java.util.HashMap[Long, Object]()
-    deciding.put(idD, flights)
+    val flight3 = new Flight(id3
+      , "Thai Airways"
+      , "Thai Air"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "10:00-11:20"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "17:30-18:50"
+      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
 
-    FirebaseDatabase.getInstance().getReference("/").child("deciding").setValue(deciding)
+    val deciding = new util.HashMap[String, Flight]()
+    deciding.put(id1, flight1)
+    deciding.put(id2, flight2)
+    deciding.put(id3, flight3)
+
+    //val deciding = new util.HashMap[String, util.HashMap[String, Flight]]()
+    //deciding.put(idD, flights)
+
+    FirebaseDatabase.getInstance()
+      .getReference("deciding")
+      .setValue(deciding)
   }
 
   private def suggestHotels(): Unit = {
     //println("TODO: จองอโกด้าสิ")
 
-    val hotel1 = Hotel(name = "Duangtawan Hotel"
-      , photo = "http://pix1.agoda.net/hotelImages/489/48944/48944_15072010480032592224.jpg"
-      , price = 1760
-      , link = "")
-    val hotel2 = Hotel(name = "The Imperial Mae Ping Hotel"
-      , photo = "http://pix3.agoda.net/hotelImages/107/10748/10748_16040716330041378045.jpg"
-      , price = 2010
-      , link = "")
-    val hotel3 = Hotel(name = "Duangtawan Hotel"
-      , photo = "//pix1.agoda.net/hotelImages/276/276670/276670_15070709560031781137.jpg"
-      , price = 2272
-      , link = "")
+    val idD = UUID.randomUUID().toString
+    val id0 = UUID.randomUUID().toString
+    val id1 = UUID.randomUUID().toString
+    val id2 = UUID.randomUUID().toString
+    val id3 = UUID.randomUUID().toString
 
-    val idD = new java.util.Date().getTime()
-    val idH = new java.util.Date().getTime() + 2
-    val id1 = new java.util.Date().getTime() + 4
-    val id2 = new java.util.Date().getTime() + 6
-    val id3 = new java.util.Date().getTime() + 8
-    val hotels = new java.util.HashMap[Long, Hotel]()
-    hotels.put(id1, hotel1)
-    hotels.put(id2, hotel2)
-    hotels.put(id3, hotel3)
-    val deciding = new java.util.HashMap[Long, Object]()
-    deciding.put(idH, hotels)
+    val hotel1 = new Hotel(id1
+      ,"Duangtawan Hotel"
+      , ""
+      , "http://pix1.agoda.net/hotelImages/489/48944/48944_15072010480032592224.jpg"
+      , 1760d, 0)
+    val hotel2 = new Hotel(id2
+      ,"The Imperial Mae Ping Hotel"
+      , ""
+      , "http://pix3.agoda.net/hotelImages/107/10748/10748_16040716330041378045.jpg"
+      , 2010d, 0)
+    val hotel3 = new Hotel(id3
+      ,"Duangtawan Hotel"
+      , ""
+      , "//pix1.agoda.net/hotelImages/276/276670/276670_15070709560031781137.jpg"
+      , 2272d, 0)
+
+    val deciding = new util.HashMap[String, Hotel]()
+    deciding.put(id1, hotel1)
+    deciding.put(id2, hotel2)
+    deciding.put(id3, hotel3)
+
+    //val deciding = new util.HashMap[String, util.HashMap[String, Hotel]]()
+    //deciding.put(id0, hotels)
 
     FirebaseDatabase.getInstance()
-      .getReference("/")
-      .child("deciding")
+      .getReference("deciding")
       .setValue(deciding)
   }
 
