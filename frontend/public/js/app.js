@@ -58,7 +58,7 @@
     // Loads the last 12 messages and listen for new ones.
     var setMessage = function(data) {
       var val = data.val();
-      this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
+      this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.created);
     }.bind(this);
     this.messagesRef.limitToLast(12).on('child_added', setMessage);
     this.messagesRef.limitToLast(12).on('child_changed', setMessage);
@@ -71,12 +71,14 @@
     if (this.template.input && this.checkSignedInWithMessage()) {
       var currentUser = this.auth.currentUser;
       var profileUrl = currentUser.photoURL ||  '/images/profile_placeholder.png';
+      var createdDate = new Date().toISOString();
 
       // Add a new message entry to the Firebase Database.
       this.messagesRef.push({
         name: currentUser.displayName,
         text: this.template.input,
-        photoUrl: profileUrl
+        photoUrl: profileUrl,
+        created: createdDate
       }).then(function() {
         // Clear message text field
         this.template.input = '';
@@ -219,14 +221,14 @@
   HuskeyChat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
   // Displays a Message in the UI.
-  HuskeyChat.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
+  HuskeyChat.prototype.displayMessage = function(key, name, text, picUrl, created) {
     var temp = Array.prototype.splice.call(this.template.messageList, 0);
     temp.push({
       color: fromUserToColor(name),
       avatar: picUrl,
       text: text,
       uuid: name,
-      timestamp: new Date()
+      timestamp: created
     });
     this.template.messageList = temp;
 
