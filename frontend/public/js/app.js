@@ -279,7 +279,15 @@
 
       var chat = new HuskeyChat(template);
 
+      
+
   };
+  console.log("check install worker");
+  if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+                .register('./service-worker.js')
+                .then(function() { console.log('Service Worker Registered'); });
+  }
 
 
 })();
