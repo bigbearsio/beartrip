@@ -11,6 +11,8 @@ import models.Message
 @Singleton
 class MessageListener {
 
+  var isFirst = true
+
   val options = new FirebaseOptions.Builder()
     .setServiceAccount(new FileInputStream("/Users/nuboat/Bigbears/huskytrip-firebase-adminsdk-1u0w9-b0c93ab2d1.json"))
     .setDatabaseUrl("https://huskytrip.firebaseio.com/")
@@ -23,11 +25,16 @@ class MessageListener {
     .getReference("messages")
 
   ref.limitToLast(1)
-  ref.addChildEventListener(new ChildEventListener {
+    .addChildEventListener(new ChildEventListener {
     override def onChildAdded(dataSnapshot: DataSnapshot, s: String): Unit = {
+      if (isFirst) {
+        isFirst = false
+        return
+      }
+
       val message = parseToMessage(dataSnapshot)
-      suggestion(message)
       println(s"Added: ${message}")
+      suggestion(message)
     }
 
     override def onChildRemoved(dataSnapshot: DataSnapshot): Unit = {}
@@ -53,7 +60,7 @@ class MessageListener {
   private def suggestion(message: Message): Unit = {
     val pattern = message.text.toLowerCase
     if (pattern.contains("เครื่องบิน")
-      || pattern.contains("การเดินทาง")) {
+      || pattern.contains("เดินทาง")) {
 
       suggestFlights()
     }
