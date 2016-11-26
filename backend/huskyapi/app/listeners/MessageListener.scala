@@ -144,19 +144,19 @@ class MessageListener @Inject()(config: Configuration) {
 
     val hotel1 = new Hotel(id1
       ,"Duangtawan Hotel"
-      , ""
+      , "https://www.agoda.com/duangtawan-hotel/hotel/chiang-mai-th.html?checkin=2016-12-24&los=2&adults=2&rooms=1&cid=-1&searchrequestid=2cb15ad2-47fb-42dc-8732-de7f0ca64ce1"
       , "http://pix1.agoda.net/hotelImages/489/48944/48944_15072010480032592224.jpg"
-      , 1760d, 0)
+      , 2668d, 0)
     val hotel2 = new Hotel(id2
       ,"The Imperial Mae Ping Hotel"
-      , ""
-      , "http://pix3.agoda.net/hotelImages/107/10748/10748_16040716330041378045.jpg"
-      , 2010d, 0)
+      , "https://www.agoda.com/the-imperial-mae-ping-hotel/hotel/chiang-mai-th.html?checkin=2016-12-24&los=2&adults=2&rooms=1&cid=-1&searchrequestid=2cb15ad2-47fb-42dc-8732-de7f0ca64ce1"
+      , "https://pix3.agoda.net/hotelImages/107/10748/10748_16040716330041378045.jpg?s=1100x825"
+      , 2458d, 0)
     val hotel3 = new Hotel(id3
-      ,"Duangtawan Hotel"
-      , ""
-      , "//pix1.agoda.net/hotelImages/276/276670/276670_15070709560031781137.jpg"
-      , 2272d, 0)
+      ,"Le Meridien Chiang Mai Hotel"
+      , "https://www.agoda.com/le-meridien-chiang-mai-hotel/hotel/chiang-mai-th.html?checkin=2016-12-24&los=2&adults=2&rooms=1&cid=-1&searchrequestid=2cb15ad2-47fb-42dc-8732-de7f0ca64ce1"
+      , "https://pix2.agoda.net/hotelImages/194/194958/194958_16052705370042776689.jpg?s=1100x825"
+      , 8319d, 0)
 
     val deciding = new util.HashMap[String, Hotel]()
     deciding.put(id1, hotel1)
