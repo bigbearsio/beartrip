@@ -74,7 +74,7 @@ class MessageListener {
   }
 
   private def suggestFlights(): Unit = {
-    println("TODO: นั่งเครืองบินไปสิ")
+    //println("TODO: นั่งเครืองบินไปสิ")
     val flight1 = Flight(name="Thai Airways" 
         , airline="CNX-BKK" 
         , arrival="2016-12-26" 
@@ -102,7 +102,7 @@ class MessageListener {
   }
 
   private def suggestHotels(): Unit = {
-    println("TODO: จองอโกด้าสิ")
+    //println("TODO: จองอโกด้าสิ")
 
     val hotel1 = Hotel(name="Duangtawan Hotel" 
                         ,photo="http://pix1.agoda.net/hotelImages/489/48944/48944_15072010480032592224.jpg" 
