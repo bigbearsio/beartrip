@@ -2,11 +2,11 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 
-import play.api.Configuration
+import listeners.MessageListener
 import play.api.mvc.{Action, Controller}
 
 @Singleton
-class Application @Inject()(config: Configuration) extends Controller {
+class Application @Inject()(listener: MessageListener) extends Controller {
 
   def index = Action { implicit request =>
     Ok(views.html.index("Hello World !"))
