@@ -23,7 +23,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // setup middleware used
-app.use(favicon(__dirname + '/public/images/favicon.png'));
+//app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -186,3 +186,4 @@ server.pid
 /dist/
 .cache
 
+frontend/public/bower_components
