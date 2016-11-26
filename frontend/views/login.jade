@@ -1,0 +1,25 @@
+extends layout2
+
+block content
+    div.container
+        h1 Login
+    div.container
+        div.row
+            div(class='g-signin2', data-onsuccess='onSignIn', data-theme="dark") 
+    script(src='https://www.gstatic.com/firebasejs/3.6.1/firebase.js')
+    script(src='https://apis.google.com/js/platform.js')
+    script(src='js/husky.guard.js')
+    script(src="bower_components/webcomponentsjs/webcomponents-lite.min.js")
+    script.
+        var app = firebase.initializeApp({
+                apiKey: "AIzaSyA4hWuJA6X00a59eOHjAeSi1UmIuGJU1fc",
+                authDomain: "huskytrip.firebaseapp.com",
+                storageBucket: "huskytrip.appspot.com",                    
+                messagingSenderId: "525906797956"
+            });
+        $(document).ready(function() {
+            console.log( "ready!" );
+            
+        });
+
+        HuskyGuard.forceLogin();

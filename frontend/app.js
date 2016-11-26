@@ -39,7 +39,8 @@ if (app.get('env') == 'development') {
 }
 
 // HTML views
-app.get('/', routes.index);
+app.get('/login', routes.login);
+app.get('/home', routes.index);
 app.get('/product', routes.product);
 app.get('/cart', routes.cart);
 
