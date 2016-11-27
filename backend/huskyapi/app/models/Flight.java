@@ -15,6 +15,7 @@ public class Flight implements Serializable {
     public String departureTime;
     public String photo;
     public Double price;
+    public Integer score;
 
     public Flight(String id
             , String name
@@ -26,7 +27,8 @@ public class Flight implements Serializable {
             , String departureDate
             , String departureTime
             , String photo
-            , Double price) {
+            , Double price
+            , Integer score) {
         this.id = id;
         this.name = name;
         this.airline = airline;
@@ -38,5 +40,6 @@ public class Flight implements Serializable {
         this.departureTime = departureTime;
         this.photo = photo;
         this.price = price;
+        this.score = score;
     }
 }
