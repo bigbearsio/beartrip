@@ -19,8 +19,8 @@ class MessageListener @Inject()(config: Configuration) {
   var isFirst = true
 
   val options = new FirebaseOptions.Builder()
-    //.setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
-    .setServiceAccount(new FileInputStream("/Users/prapat/huskydbkey.json"))
+    .setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
+    //.setServiceAccount(new FileInputStream("/Users/prapat/huskydbkey.json"))
     .setDatabaseUrl("https://huskytrip.firebaseio.com/")
     .build()
 
