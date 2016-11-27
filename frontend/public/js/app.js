@@ -363,6 +363,14 @@
 
       var template = document.querySelector('template[is=dom-bind]');
 
+      setTimeout(function () {
+
+          if (window.innerWidth < 800) {
+              var drawer = document.querySelector('#drawerPanel');
+              drawer.drawerWidth = '95%';
+          }
+      }, 0);
+
       var chat = new HuskeyChat(template);
 
       
