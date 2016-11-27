@@ -1,5 +1,5 @@
-var dataCacheName = 'huskyTrip-v1';
-var cacheName = 'huskyTrip-V1';
+var dataCacheName = 'huskyTrip-v1.3';
+var cacheName = 'huskyTrip-V1.3';
 var filesToCache = [
   '/',
   '/index.html',
