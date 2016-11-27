@@ -18,6 +18,7 @@ class MessageListener @Inject()(config: Configuration) {
 
   val options = new FirebaseOptions.Builder()
     .setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
+    //.setServiceAccount(new FileInputStream("/Users/prapat/huskydbkey.json"))
     .setDatabaseUrl("https://huskytrip.firebaseio.com/")
     .build()
 
@@ -89,36 +90,39 @@ class MessageListener @Inject()(config: Configuration) {
 
     val flight1 = new Flight(id1
       , "Thai Airways"
-      , "Thai Air"
+      , "TG"
       , "CNX-BKK"
       , "2016-12-26"
-      , "10:00-11:20"
+      , "6:15a-7:30a"
       , "BKK-CNX"
       , "2016-12-24"
-      , "17:30-18:50"
-      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
+      , "10:20p-11:35p"
+      , "https://a1.r9cdn.net/res/images/air/2x/TG.png"
+      , 3750d)
 
     val flight2 = new Flight(id2
-      , "Thai Airways"
-      , "Thai Air"
+      , "Thai Smile"
+      , "WE"
       , "CNX-BKK"
       , "2016-12-26"
-      , "10:00-11:20"
+      , "6:15a-7:30a"
       , "BKK-CNX"
       , "2016-12-24"
-      , "17:30-18:50"
-      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
+      , "10:20p-11:35p"
+      , "https://a1.r9cdn.net/res/images/air/2x/WE.png"
+      , 4098d)
 
     val flight3 = new Flight(id3
-      , "Thai Airways"
-      , "Thai Air"
+      , "Bangkok Airways"
+      , "PG"
       , "CNX-BKK"
       , "2016-12-26"
-      , "10:00-11:20"
+      , "9:15p-10:30p"
       , "BKK-CNX"
       , "2016-12-24"
-      , "17:30-18:50"
-      , "https://a1.r9cdn.net/res/images/air/2x/TG.png?v=3ffd422baac0a417e639eab051d1a7ebd59aaf5d")
+      , "06:15a-07:30a"
+      , "https://a1.r9cdn.net/res/images/air/2x/PG.png"
+      , 4471d)
 
     val deciding = new util.HashMap[String, Flight]()
     deciding.put(id1, flight1)
