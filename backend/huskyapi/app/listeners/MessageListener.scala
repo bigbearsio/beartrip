@@ -19,8 +19,8 @@ class MessageListener @Inject()(config: Configuration) {
   var isFirst = true
 
   val options = new FirebaseOptions.Builder()
-    .setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
-    //.setServiceAccount(new FileInputStream("/Users/prapat/huskydbkey.json"))
+    //.setServiceAccount(new FileInputStream(config.getString("huskytrip.key").get))
+    .setServiceAccount(new FileInputStream("/Users/prapat/huskydbkey.json"))
     .setDatabaseUrl("https://huskytrip.firebaseio.com/")
     .build()
 
@@ -193,7 +193,6 @@ class MessageListener @Inject()(config: Configuration) {
   val huskyName = "Husky"
   private def huskiResponse(text:String): Unit = {
 
-    val id = UUID.randomUUID().toString
     val jmessage = new JMessage(sdf.format(new java.util.Date())
       , text
       , huskyImage
