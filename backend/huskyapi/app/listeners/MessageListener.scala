@@ -7,12 +7,14 @@ import javax.inject.{Inject, Singleton}
 
 import com.google.firebase.database._
 import com.google.firebase.{FirebaseApp, FirebaseOptions}
-import models.{Flight, Hotel, Message}
+import models.{Flight, Hotel, JMessage, Message}
 import play.api.Configuration
 
 
 @Singleton
 class MessageListener @Inject()(config: Configuration) {
+
+  val sdf = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 
   var isFirst = true
 
@@ -81,64 +83,16 @@ class MessageListener @Inject()(config: Configuration) {
   }
 
   private def suggestFlights(): Unit = {
-    //println("TODO: นั่งเครืองบินไปสิ")
-    val idD = UUID.randomUUID().toString
-    val idF = UUID.randomUUID().toString
-    val id1 = UUID.randomUUID().toString
-    val id2 = UUID.randomUUID().toString
-    val id3 = UUID.randomUUID().toString
-
-    val flight1 = new Flight(id1
-      , "Thai Airways"
-      , "TG"
-      , "CNX-BKK"
-      , "2016-12-26"
-      , "6:15a-7:30a"
-      , "BKK-CNX"
-      , "2016-12-24"
-      , "10:20p-11:35p"
-      , "https://a1.r9cdn.net/res/images/air/2x/TG.png"
-      , 3750d)
-
-    val flight2 = new Flight(id2
-      , "Thai Smile"
-      , "WE"
-      , "CNX-BKK"
-      , "2016-12-26"
-      , "6:15a-7:30a"
-      , "BKK-CNX"
-      , "2016-12-24"
-      , "10:20p-11:35p"
-      , "https://a1.r9cdn.net/res/images/air/2x/WE.png"
-      , 4098d)
-
-    val flight3 = new Flight(id3
-      , "Bangkok Airways"
-      , "PG"
-      , "CNX-BKK"
-      , "2016-12-26"
-      , "9:15p-10:30p"
-      , "BKK-CNX"
-      , "2016-12-24"
-      , "06:15a-07:30a"
-      , "https://a1.r9cdn.net/res/images/air/2x/PG.png"
-      , 4471d)
-
-    val deciding = new util.HashMap[String, Flight]()
-    deciding.put(id1, flight1)
-    deciding.put(id2, flight2)
-    deciding.put(id3, flight3)
-
-    //val deciding = new util.HashMap[String, util.HashMap[String, Flight]]()
-    //deciding.put(idD, flights)
-
-    FirebaseDatabase.getInstance()
-      .getReference("deciding")
-      .setValue(deciding)
+    setMockDecidingFlights()
+    huskiResponse("โฮ่งๆ")
   }
 
   private def suggestHotels(): Unit = {
-    //println("TODO: จองอโกด้าสิ")
+    setMockDecidingHotels()
+    huskiResponse("Roger")
+  }
+
+  private def setMockDecidingHotels(): Unit = {
 
     val idD = UUID.randomUUID().toString
     val id0 = UUID.randomUUID().toString
@@ -174,5 +128,82 @@ class MessageListener @Inject()(config: Configuration) {
       .getReference("deciding")
       .setValue(deciding)
   }
+
+  private def setMockDecidingFlights(): Unit = {
+    val idD = UUID.randomUUID().toString
+    val idF = UUID.randomUUID().toString
+    val id1 = UUID.randomUUID().toString
+    val id2 = UUID.randomUUID().toString
+    val id3 = UUID.randomUUID().toString
+
+    val flight1 = new Flight(id1
+      , "Thai Airways"
+      , "TG"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "6:15a-7:30a"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "10:20p-11:35p"
+      , "https://a1.r9cdn.net/res/images/air/2x/TG.png"
+      , 3750d
+      , 0)
+
+    val flight2 = new Flight(id2
+      , "Thai Smile"
+      , "WE"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "6:15a-7:30a"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "10:20p-11:35p"
+      , "https://a1.r9cdn.net/res/images/air/2x/WE.png"
+      , 4098d
+      , 0)
+
+    val flight3 = new Flight(id3
+      , "Bangkok Airways"
+      , "PG"
+      , "CNX-BKK"
+      , "2016-12-26"
+      , "9:15p-10:30p"
+      , "BKK-CNX"
+      , "2016-12-24"
+      , "06:15a-07:30a"
+      , "https://a1.r9cdn.net/res/images/air/2x/PG.png"
+      , 4471d
+      , 0)
+
+    val deciding = new util.HashMap[String, Flight]()
+    deciding.put(id1, flight1)
+    deciding.put(id2, flight2)
+    deciding.put(id3, flight3)
+
+    //val deciding = new util.HashMap[String, util.HashMap[String, Flight]]()
+    //deciding.put(idD, flights)
+
+    FirebaseDatabase.getInstance()
+      .getReference("deciding")
+      .setValue(deciding)
+  }
+
+
+  val huskyImage = "https://huskytrip.firebaseapp.com/images/app-icon-192.png"
+  val huskyName = "Husky"
+  private def huskiResponse(text:String): Unit = {
+
+    val id = UUID.randomUUID().toString
+    val jmessage = new JMessage(sdf.format(new java.util.Date())
+      , text
+      , huskyImage
+      , huskyName)
+
+    FirebaseDatabase.getInstance()
+      .getReference("messages")
+      .push()
+      .setValue(jmessage)
+  }
+
 
 }
