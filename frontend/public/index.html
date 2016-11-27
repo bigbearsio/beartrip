@@ -106,23 +106,28 @@
     <section id="deciding">
         <paper-item class="subdue layout horizontal center">Deciding</paper-item>
 
-<div class="horizontal">
-  <template is="dom-repeat" items="{{deciding}}" as="item">
-    <paper-card image="{{item.photo}}" alt="Travel" class="white" style="margin-left:4px; margin-top: 4px; width:200px;">
-      <div class="card-content">
-        <div class="cafe-header">{{item.name}}
+        <div class="horizontal">
+          <template is="dom-repeat" items="{{deciding}}" as="item">
+            <paper-card image="{{item.photo}}" alt="Travel" alt="Travel" class="white" style="margin-left:4px; margin-top: 4px; width:200px;">
+              <div class="card-content">
+                <div class="cafe-header">{{item.name}}
+                  <div class="cafe-location cafe-light">
+                    <iron-icon icon="favorite"></iron-icon>
+                    <span>{{item.score}}</span>
+                  </div>
+                </div>
+                <p>฿ {{item.price}}</p>
+                <p>{{item.departure}}</p>
+                <p>{{item.departureDate}} {{item.departureTime}}</p>
+                <p class="cafe-light"></p>
+              </div>
+              <div class="card-actions horizontal justified">
+                <paper-icon-button on-tap="likeSend" icon="favorite"></paper-icon-button>
+                <paper-icon-button icon="check" on-tap="saveToDecided"></paper-icon-button>
+              </div>
+            </paper-card>
+          </template>
         </div>
-        <p>฿ {{item.price}}</p>
-        <p class="cafe-light"></p>
-      </div>
-      <div class="card-actions horizontal justified">
-        <paper-icon-button on-tap="likeSend" icon="favorite"></paper-icon-button>
-        <paper-icon-button icon="check" on-tap="saveToDecided"></paper-icon-button>
-        <paper-button>{{item.score}}</paper-button>
-      </div>
-    </paper-card>
-  </template>
-</div>
     </section>
 
     <section id="decided">
